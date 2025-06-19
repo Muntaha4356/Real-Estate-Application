@@ -33,6 +33,6 @@ export const login = async (req, res)=>{
             })
             return res.json({success: true});
     }catch(error){
-        res.json({success: false, message: error.message})
+        res.json({success: false, message: error.message})       
     }
 }

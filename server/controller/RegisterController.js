@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import userModel from '../models/usersmodel.js';
+import transporter from '../config/nodemailer.js';
 
 
 export const register = async (req, res)=>{
@@ -32,6 +33,17 @@ export const register = async (req, res)=>{
             maxAge: 7 * 24 * 60 * 60 * 100, //After 7days it should expire
 
         })
+
+        //sending an email
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Welcome to the Application',
+            text: `Welcome to the Application. Email ${email} has been registered. Your Learning journey begins with us. lol`,
+
+        }
+
+        await transporter.sendMail(mailOptions);
 
         return res.json({success: true});
 
