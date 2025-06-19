@@ -1,5 +1,6 @@
 import userModel from "../models/usersmodel.js";
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 export const login = async (req, res)=>{
     const {email, password} = req.body;
@@ -20,7 +21,7 @@ export const login = async (req, res)=>{
  
             }
 
-            const token_applied = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: '7d'});
+            const token_applied = jwt.sign({id: userExist._id}, process.env.JWT_SECRET, {expiresIn: '7d'});
             
                     //send token -> user in response -> add cookie(token is sent through it) to response
             res.cookie('token', token_applied, {
@@ -31,7 +32,7 @@ export const login = async (req, res)=>{
                         
             })
             return res.json({success: true});
-    }catch(e){
+    }catch(error){
         res.json({success: false, message: error.message})
     }
 }
