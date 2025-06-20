@@ -1,9 +1,12 @@
 import userModel from "../models/usersmodel.js";
-
+import transporter from "../config/nodemailer.js";
 export const SendVerifyOTP =async(req, res)=>{
     try{
         const {userId} =req.body;
         const userExist = await userModel.findById(userId);
+        if (!userExist) {
+            return res.json({ success: false, message: "User not found" });
+        }
         if (userExist.status){
             return res.json({success: false, message: "Account Already Verified"})
 
@@ -20,7 +23,7 @@ export const SendVerifyOTP =async(req, res)=>{
         //sending OTP email 
         const mailOptions = {
             from: process.env.EMAIL_USER,
-            to: email,
+            to: userExist.email,
             subject: 'OTP for Verifying the account',
             text: `Your OTP is ${OTP}`,
         }
