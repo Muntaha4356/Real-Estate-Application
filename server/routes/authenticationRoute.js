@@ -4,12 +4,15 @@ import { login } from '../controller/LoginController.js';
 import { Logout } from '../controller/LogoutController.js';
 import userAuth from '../middleware/userAuth.js';
 import { VerifyAccount, SendVerifyOTP } from '../controller/VerifyAccountController.js';
+import { isAuthenticated } from '../controller/isAuthenticated.js';
+import { resetPassword, resetPasswordOtpSend } from '../controller/resetPassword.js';
+import { getUserData } from '../controller/useInfoController.js';
 const authRouter = express.Router();
 
 
-authRouter.post('/signup',userAuth, register);
+authRouter.post('/signup', register);
 
-authRouter.post('/login',userAuth, login);
+authRouter.post('/login', login);
 
 authRouter.post('/logout',userAuth, Logout);
 
@@ -17,4 +20,11 @@ authRouter.post('/send-verify-OTP', userAuth ,SendVerifyOTP)
 
 authRouter.post('/verifyOtp', userAuth, VerifyAccount)
 
+authRouter.post('/is-auth', userAuth, isAuthenticated)
+
+authRouter.post('/send-reset-otp', resetPasswordOtpSend) //wedon'tneedmiddleware cuz userid is not needed
+
+authRouter.post('/password-reset', resetPassword)
+
+authRouter.patch('/user-info', userAuth, getUserData)
 export default authRouter;

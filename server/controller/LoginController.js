@@ -17,7 +17,7 @@ export const login = async (req, res)=>{
             //unhasedPassword
             const isPasswordMatch = await bcrypt.compare(password, userExist.password)
             if(!isPasswordMatch){
-                res.json({success: false, message: 'Password does not match'});
+                return res.json({success: false, message: 'Password does not match'});
  
             }
 
@@ -28,7 +28,7 @@ export const login = async (req, res)=>{
                 httpOnly : true,
                 secure: process.env.NODE_ENV === 'production', //if NODE_ENV is in production... it's true else, it's false
                 sameSite: process.env.NODE_ENV=== 'production' ? 'none' : 'strict', //strict: if same server i.e. local host, none: if different environment
-                maxAge: 7 * 24 * 60 * 60 * 100, //After 7days it should expire
+                maxAge: 7 * 24 * 60 * 60 * 1000, //After 7days it should expire
                         
             })
             return res.json({success: true});
