@@ -16,7 +16,9 @@ connectDb();
 app.use(express.json());
 
 app.use(cookieParser());
-app.use(cors({credentials: true})) //sending cookies in response tofrontend
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true})) //sending cookies in response tofrontend
 
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRoutes);
