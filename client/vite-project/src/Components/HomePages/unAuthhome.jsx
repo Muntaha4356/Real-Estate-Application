@@ -7,7 +7,7 @@ const UnAuthhome = () => {
     navigate('/signin')
   }
   const handleSignUp = async() =>{
-    navigate('/signin')
+    navigate('/signup')
   }
   return (
     <div>

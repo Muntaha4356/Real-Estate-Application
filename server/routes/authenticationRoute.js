@@ -7,6 +7,7 @@ import { VerifyAccount, SendVerifyOTP } from '../controller/VerifyAccountControl
 import { isAuthenticated } from '../controller/isAuthenticated.js';
 import { resetPassword, resetPasswordOtpSend } from '../controller/resetPassword.js';
 import { getUserData } from '../controller/useInfoController.js';
+import { isLoggedIn } from '../controller/isLoggedIn.js';
 const authRouter = express.Router();
 
 
@@ -26,5 +27,7 @@ authRouter.post('/send-reset-otp', resetPasswordOtpSend) //wedon'tneedmiddleware
 
 authRouter.post('/password-reset', resetPassword)
 
-authRouter.patch('/user-info', userAuth, getUserData)
+authRouter.get('/user-info', userAuth, getUserData)
+
+authRouter.post('/is-logged-in', userAuth, isLoggedIn)
 export default authRouter;

@@ -28,7 +28,7 @@ const Register = () => {
       const result = await response.json();
       if(result.success){
         alert('Sign up Successful')
-        navigate('/verifyotp');
+        navigate('/');
       }else {
         alert(`Error: ${result.message}`);
       }

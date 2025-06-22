@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
+
 const Login = () => {
   const navigate = useNavigate();
   const [formData,  setFormData] = useState({
@@ -31,7 +32,7 @@ const Login = () => {
       const result = await response.json();
       if(result.success){
         alert('Login Successful')
-        navigate('/verifyotp');
+        navigate('/');
       }else {
         alert(`Error: ${result.message}`);
       }
@@ -41,6 +42,10 @@ const Login = () => {
       alert('Login failed. Please try again.');
       console.error(err);}
   }
+  const forgotPassword=async(e)=>{
+    navigate('/email-enter')
+  }
+  
   return (
     <div>
       <div className="container">
@@ -55,7 +60,7 @@ const Login = () => {
             <input name='password' type="password" placeholder='Password' value={formData.password}  onChange={handleChange}/>
         </div>
         <div className="forgetPassword">
-            <a href="">Forgot Password</a>
+            <a href="" onClick={forgotPassword}>Forgot Password?</a>
         </div>
         <div className="signup-div">
             <button type='submit' >Sign In</button>

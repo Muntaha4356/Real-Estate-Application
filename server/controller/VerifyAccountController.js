@@ -50,10 +50,12 @@ export const VerifyAccount = async(req, res)=>{
 
         }
         if(user.verifyOTP==='' || user.verifyOTP !== otp){
+            console.log("Otp mismatched");
             return res.json({success:false, message:'Invalid Otp, Generate the OTP'})
         }
         //check for expiry date
         if(user.verifyOTPExpireAt.getTime() < Date.now()){
+            console.log("Otp expired");
             return res.json({success: false, message: "OTP expired"})
         }
         user.status= true;
@@ -61,6 +63,7 @@ export const VerifyAccount = async(req, res)=>{
         user.verifyOTPExpireAt=null;
         
         await user.save();
+        console.log("Updating user status to true for user:", user._id);
         return res.json({success:true, message:"User Verified successfully"});
     }
     catch(error){
