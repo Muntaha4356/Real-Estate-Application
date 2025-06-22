@@ -85,43 +85,46 @@ const ResetOtpVerify = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
-      <div className="bg-white p-6 rounded-2xl shadow-lg w-full max-w-sm text-center">
-        <h2 className="text-2xl font-bold mb-4">Reset Password</h2>
-        <p className="text-gray-500 mb-6">Enter the 6-digit OTP sent to your email and your new password.</p>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#cbd5ff] via-[#e6ccff] to-[#f9e6ff] px-4">
+  <div className="backdrop-blur-md bg-white/10 border border-white/20 p-8 rounded-2xl shadow-2xl w-full max-w-sm text-center">
+    <h2 className="text-2xl font-bold text-white mb-2">Reset Password</h2>
+    <p className="text-white/80 text-sm mb-6">
+      Enter the 6-digit OTP sent to your email and your new password.
+    </p>
 
-        <div className="flex justify-center gap-2 mb-4">
-          {otp.map((value, index) => (
-            <input
-              key={index}
-              type="text"
-              inputMode="numeric"
-              maxLength="1"
-              ref={(el) => (inputsRef.current[index] = el)}
-              className="w-10 h-12 text-center text-xl border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={value}
-              onChange={(e) => handleChange(e, index)}
-              onKeyDown={(e) => handleKeyDown(e, index)}
-            />
-          ))}
-        </div>
-
+    <div className="flex justify-center gap-2 mb-6">
+      {otp.map((value, index) => (
         <input
-          type="password"
-          placeholder="New Password"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          key={index}
+          type="text"
+          inputMode="numeric"
+          maxLength="1"
+          className="w-12 h-14 text-center text-xl rounded-md bg-white/90 text-gray-800 border border-gray-300 shadow focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+          value={value}
+          onChange={(e) => handleChange(e, index)}
+          onKeyDown={(e) => handleKeyDown(e, index)}
+          ref={(el) => (inputsRef.current[index] = el)}
         />
-
-        <button
-          onClick={handleSubmit}
-          className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-        >
-          Reset Password
-        </button>
-      </div>
+      ))}
     </div>
+
+    <input
+      type="password"
+      placeholder="New Password"
+      value={newPassword}
+      onChange={(e) => setNewPassword(e.target.value)}
+      className="w-full px-4 py-3 mb-6 bg-white/90 text-gray-800 rounded-md border border-gray-300 shadow focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+    />
+
+    <button
+      onClick={handleSubmit}
+      className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:opacity-90 transition font-semibold"
+    >
+      Reset Password
+    </button>
+  </div>
+</div>
+
   );
 };
 

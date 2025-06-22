@@ -47,30 +47,53 @@ const Login = () => {
   }
   
   return (
-    <div>
-      <div className="container">
-        <h1>Create Account</h1>
-        <p>Enter Your Details</p>
-        <form onSubmit={handleSubmit} action="">
-        
-        <div className="Email">
-            <input name='email' type="email" placeholder='Email' value={formData.email} onChange={handleChange}/>
-        </div>
-        <div className="Password">
-            <input name='password' type="password" placeholder='Password' value={formData.password}  onChange={handleChange}/>
-        </div>
-        <div className="forgetPassword">
-            <a href="" onClick={forgotPassword}>Forgot Password?</a>
-        </div>
-        <div className="signup-div">
-            <button type='submit' >Sign In</button>
-        </div>
-        <div className="already-account">
-            <p>Do Not Have an Account? <a href="" onClick={signupshift}>Sign Up</a> instead</p>
-            
-        </div>
-
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 p-6">
+      <div className="w-full max-w-md bg-white/80 backdrop-blur-lg rounded-2xl shadow-2xl p-8 space-y-6">
+        <h2 className="text-3xl font-bold text-center text-gray-900">Sign In</h2>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Email"
+            required
+            className="w-full px-4 py-3 border rounded-xl bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Password"
+            required
+            className="w-full px-4 py-3 border rounded-xl bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+          <div className="text-right">
+            <button
+              type="button"
+              onClick={forgotPassword}
+              className="text-sm text-indigo-600 hover:underline"
+            >
+              Forgot Password?
+            </button>
+          </div>
+          <button
+            type="submit"
+            className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:opacity-90 transition"
+          >
+            Sign In
+          </button>
         </form>
+        <p className="text-center text-gray-700">
+          Don’t have an account?{' '}
+          <button
+            onClick={signupshift}
+            className="text-indigo-600 font-semibold hover:underline"
+          >
+            Sign Up
+          </button>
+        </p>
       </div>
     </div>
   )

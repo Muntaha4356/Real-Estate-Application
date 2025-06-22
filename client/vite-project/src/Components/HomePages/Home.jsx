@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
+import robotImg from '../../assets/robot.png';
 const Home = () => {
   const navigate = useNavigate();
   const [showVerifyBtn, setShowVerifyBtn] = useState(false);
-
+  const [username, setUsername]=useState('')
   
   useEffect(() => {
     const checkVerificationStatus = async () => {
@@ -77,17 +78,37 @@ const Home = () => {
         }
   }
   return (
-    <div>
-      
-      <h1>Hello, Welcome Name to the Application</h1>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-50 to-white px-4">
+      <div className="max-w-xl text-center space-y-6">
+        <img src={robotImg} alt="Robot" className="mx-auto w-40 h-40" />
 
-      {showVerifyBtn && (
-        <button onClick={handleVerification}>Verify Account</button>
-      )}
-      <button onClick={handleLogout}>Logout</button>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
+          Hello, {username || 'Developer'}!
+        </h1>
 
+        <p className="text-gray-600 text-lg">
+          Welcome to the application. Let’s get started!
+        </p>
+
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <button
+            onClick={handleLogout}
+            className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-full shadow-lg transform hover:scale-105 transition"
+          >
+            Logout
+          </button>
+          {showVerifyBtn && (
+            <button
+              onClick={handleVerification}
+              className="px-8 py-3 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-semibold rounded-full shadow-lg transform hover:scale-105 transition"
+            >
+              Verify Account
+            </button>
+          )}
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
 export default Home
