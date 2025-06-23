@@ -29,5 +29,5 @@ authRouter.post('/password-reset', resetPassword)
 
 authRouter.get('/user-info', userAuth, getUserData)
 
-authRouter.post('/is-logged-in', userAuth, isLoggedIn)
+authRouter.get('/isLoggedIn',  isLoggedIn)
 export default authRouter;

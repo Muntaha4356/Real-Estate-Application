@@ -129,5 +129,3 @@ const ResetOtpVerify = () => {
 };
 
 export default ResetOtpVerify;
-
-

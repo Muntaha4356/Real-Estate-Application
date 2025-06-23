@@ -6,7 +6,6 @@ import connectDb from "./config/connect.js";
 import authRouter from './routes/authenticationRoute.js'
 import userRoutes from "./routes/userRoute.js";
 
-
 const app = express();
 
 const port =process.env.PORT || 3000;

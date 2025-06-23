@@ -8,16 +8,26 @@ import OTPverify from './Components/verifyPage/ResetOtpverify'
 import UnAuthhome from './Components/HomePages/UnAuthhome'
 import EnterEmail from './Components/verifyPage/EnterEmail'
 import ResetOtpVerify from './Components/verifyPage/ResetOtpverify'
-import ProtectedRoute from './Components/ProtectionRoute'
+import ProtectedRoute from './Components/protectionFunctions/ProtectedRoute'
+import UnProtectedRoute from './Components/protectionFunctions/UnprotectedRoute'
+
 function App() {
 
   return (
     <>
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/unauth' element= {<UnAuthhome/>}/>
-        <Route path='/signup' element={<Register/>}/>
-        <Route path='/signin' element={<Login/>}/>
+        {/* Protected Routes */}
+        <Route element={<ProtectedRoute/>}>
+          <Route path='/' element={<Home />}/>
+        </Route>
+        {/*unprotected Route*/ }
+        <Route element={<UnProtectedRoute/>}>
+          <Route path='/unauth' element= {<UnAuthhome/>}/>
+          <Route path='/signup' element={<Register/>}/>
+          <Route path='/signin' element={<Login/>}/>
+        </Route>
+        
+        
         <Route path='/sendemail' element={<EmailVerify/>}/>
         <Route path='/verifyotp' element={<OTPverify/>}/>
         <Route path='/email-enter' element={<EnterEmail/>}/>
