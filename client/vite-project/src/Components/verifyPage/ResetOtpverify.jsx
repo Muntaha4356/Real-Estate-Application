@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const ResetOtpVerify = () => {
   const [otp, setOtp] = useState(new Array(6).fill(''));
@@ -13,7 +14,7 @@ const ResetOtpVerify = () => {
     if (location.state && location.state.email) {
       setEmail(location.state.email);
     } else {
-      alert('No email found. Redirecting...');
+      toast.error('No email found. Redirecting...');
       navigate('/email-enter');
     }
   }, [location, navigate]);
@@ -53,7 +54,7 @@ const ResetOtpVerify = () => {
   const handleSubmit = async () => {
     const finalOtp = otp.join('');
     if (finalOtp.length !== 6 || !newPassword) {
-      alert('Please enter full OTP and a new password.');
+      toast.error('Please enter full OTP and a new password.');
       return;
     }
 
@@ -73,14 +74,14 @@ const ResetOtpVerify = () => {
       const result = await response.json();
 
       if (result.success) {
-        alert('Password reset successful!');
+        toast.success('Password reset successful!');
         navigate('/signin');
       } else {
-        alert(`Error: ${result.message}`);
+        toast.error(`Error: ${result.message}`);
       }
     } catch (error) {
       console.error(error);
-      alert('Something went wrong. Please try again.');
+      toast.error('Something went wrong. Please try again.');
     }
   };
 

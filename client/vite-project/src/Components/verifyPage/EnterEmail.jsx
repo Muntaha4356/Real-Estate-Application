@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const EnterEmail = () => {
   const [email, setEmail] = useState('');
@@ -9,7 +10,7 @@ const EnterEmail = () => {
     e.preventDefault();
 
     if (!email) {
-      alert("Please enter your email.");
+      toast.error("Please enter your email.");
       return;
     }
 
@@ -26,14 +27,14 @@ const EnterEmail = () => {
       const result = await response.json();
 
       if (result.success) {
-        alert('Password Reset OTP sent. Please check your email.');
+        toast.success('Password Reset OTP sent. Please check your email.');
         navigate('/resetOtpverify', { state: { email } })
       } else {
-        alert(`Error: ${result.message}`);
+        toast.error(`Error: ${result.message}`);
       }
     } catch (error) {
       console.error(error);
-      alert('OTP sending failed. Please try again.');
+      toast.error('OTP sending failed. Please try again.');
     }
   };
 

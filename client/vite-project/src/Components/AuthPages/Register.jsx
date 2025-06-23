@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const Register = () => {
 
@@ -27,15 +28,15 @@ const Register = () => {
       });
       const result = await response.json();
       if(result.success){
-        alert('Sign up Successful')
+        toast.success('Sign up Successful')
         navigate('/');
       }else {
-        alert(`Error: ${result.message}`);
+        toast.error(`Error: ${result.message}`);
       }
 
     }
     catch (err) {
-      alert('Login failed. Please try again.');
+      toast.success('Login failed. Please try again.');
       console.error(err);}
   }
   const handleChange = async (e) =>{

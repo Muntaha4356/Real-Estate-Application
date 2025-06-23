@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -31,10 +31,11 @@ const Login = () => {
       });
       const result = await response.json();
       if(result.success){
-        alert('Login Successful')
+        toast.success("Logged in successfully!");
         navigate('/');
       }else {
-        alert(`Error: ${result.message}`);
+        toast.error(`Error: ${result.message}`);
+      
       }
 
     }

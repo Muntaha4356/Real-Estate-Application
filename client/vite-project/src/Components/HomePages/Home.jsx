@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import robotImg from '../../assets/robot.png';
+import toast from 'react-hot-toast';
+
 const Home = () => {
   const navigate = useNavigate();
   const [showVerifyBtn, setShowVerifyBtn] = useState(false);
@@ -44,15 +46,15 @@ const Home = () => {
       })
       const result = await response.json();
       if (result.success) {
-      alert('Verification initiated. Please check your email or enter OTP.');
+      toast.success('Verification initiated. Please check your email or enter OTP.');
       navigate('/sendemail');
     } else {
-      alert(`Error: ${result.message}`);
+      toast.error(`Error: ${result.message}`);
     }
     }catch(error) {
           console.error(error);
           
-          alert('Verification failed. Try again later.');
+          toast.error('Verification failed. Try again later.');
         }
   }
 
@@ -67,14 +69,14 @@ const Home = () => {
       })
       const result = await response.json();
       if(result.success){
-        alert('LogOut');
+        toast.success('LogOut');
         navigate('/unauth');
       }else {
-        alert(`Error: ${result.message}`);
+        toast.error(`Error: ${result.message}`);
       }
     }catch(error) {
           console.error(error);
-          alert('Logged out failed. Try again later.');
+          toast.error('Logged out failed. Try again later.');
         }
   }
   return (

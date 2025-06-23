@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+
 const EmailVerify = () => {
   const [otp, setOtp] = useState(new Array(6).fill(''));
   const navigate = useNavigate();
@@ -43,15 +45,15 @@ const EmailVerify = () => {
       })
       const result = await response.json();
       if(result.success){
-        alert('Verification initiated');
+        toast.success('Verification initiated');
         navigate('/');
       }else {
-        alert(`Error: ${result.message}`);
+        toast.error(`Error: ${result.message}`);
       }
 
     }catch(error){
       console.error(error);
-      alert('Otp send Failed. Please try again');
+      toast.error('Otp send Failed. Please try again');
     }
   };
 
