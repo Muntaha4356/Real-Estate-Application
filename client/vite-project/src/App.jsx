@@ -10,12 +10,16 @@ import EnterEmail from './Components/verifyPage/EnterEmail'
 import ResetOtpVerify from './Components/verifyPage/ResetOtpverify'
 import ProtectedRoute from './Components/protectionFunctions/ProtectedRoute'
 import UnProtectedRoute from './Components/protectionFunctions/UnprotectedRoute'
-
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import Profile from './Components/HomePages/Profile'
+import Header from './Components/HomePages/Header'
 function App() {
 
   return (
     <>
+    <Header>
       <Routes>
+        
         {/* Protected Routes */}
         <Route element={<ProtectedRoute/>}>
           <Route path='/' element={<Home />}/>
@@ -27,7 +31,7 @@ function App() {
           <Route path='/signin' element={<Login/>}/>
         </Route>
         
-        
+        <Route path='/profile' element={<Profile/>}></Route>
         <Route path='/sendemail' element={<EmailVerify/>}/>
         <Route path='/verifyotp' element={<OTPverify/>}/>
         <Route path='/email-enter' element={<EnterEmail/>}/>
@@ -35,6 +39,7 @@ function App() {
         
 
       </Routes>
+      </Header>
     </>
   )
 }

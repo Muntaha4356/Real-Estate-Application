@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-
+import { GoogleLogin } from '@react-oauth/google';
 const Login = () => {
   const navigate = useNavigate();
   const [formData,  setFormData] = useState({
@@ -85,6 +85,29 @@ const Login = () => {
           >
             Sign In
           </button>
+          <GoogleLogin
+            onSuccess={async (credentialResponse) => {
+              const res = await fetch('http://localhost:3000/api/auth/google', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+                body: JSON.stringify({ token: credentialResponse.credential }),
+              });
+
+              const result = await res.json();
+              if (result.success) {
+                toast.success('Google Login successful!');
+                navigate('/');
+              } else {
+                toast.error(`Google Login failed: ${result.message}`);
+              }
+            }}
+            onError={() => {
+              toast.error('Google login failed!');
+            }}
+          />
         </form>
         <p className="text-center text-gray-700">
           Don’t have an account?{' '}

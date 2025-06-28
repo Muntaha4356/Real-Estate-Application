@@ -8,6 +8,8 @@ import { isAuthenticated } from '../controller/isAuthenticated.js';
 import { resetPassword, resetPasswordOtpSend } from '../controller/resetPassword.js';
 import { getUserData } from '../controller/useInfoController.js';
 import { isLoggedIn } from '../controller/isLoggedIn.js';
+import { handleGoogleLogin } from '../controller/GoogleAuth.js';
+
 const authRouter = express.Router();
 
 
@@ -30,4 +32,7 @@ authRouter.post('/password-reset', resetPassword)
 authRouter.get('/user-info', userAuth, getUserData)
 
 authRouter.get('/isLoggedIn',  isLoggedIn)
+
+authRouter.post('/google', handleGoogleLogin);
+
 export default authRouter;

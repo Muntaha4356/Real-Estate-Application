@@ -15,6 +15,7 @@ export const getUserData = async(req, res) =>{
             userData:{
                 name: user.name,
                 status : user.status,
+                profilepic: user.profilepic
 
             }
         });
